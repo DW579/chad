@@ -11,46 +11,13 @@ import Form from 'react-bootstrap/Form';
 function App() {
 	const [formRow, setFormRow] = useState(true);
 	const [reviewRow, setReviewRow] = useState(false);
+	const [finalProductRow, setFinalProductRow] = useState(false);
 	const [object1, setObject1] = useState('');
 	const [object2, setObject2] = useState('');
 	const [style, setStyle] = useState({ selectedStyle: '' });
-	const [formMessage, setFormMessage] = useState('');
 	const [gptResponse, setGPTResponse] = useState(null);
-
+	
 	const { selectedStyle } = style;
-
-
-
-	// useEffect(() => {
-	// 	if(formMessage !== '') {
-	// 		fetch('/post_chatgpt', {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			},
-	// 			body: JSON.stringify({ message: "formMessage" })
-	// 		})
-	// 			.then((res) => res.json())
-	// 			.then((data) => console.log(data))
-	// 	}
-	// })
-
-	// useEffect(() => {
-	// 	if (formMessage !== '') {
-	// 		postFormMessage();
-	// 	}
-	// });
-
-	// const submitForm = (event) => {
-	// 	event.preventDefault();
-
-	// 	// setFormMessage("You are a designer that is creative, ability to simplify complex ideas, and have an artistic talent. You have been tasked by a client to create a simple 12 word prompt to generate a high resolution image with DALL·E 2 for a computer desktop. The image features an " + object1 + " and " + object2 + ". Include the exact phrase, " + style.selectedStyle + " style. Do not include the phrase DALL·E 2, verbs, and adjectives in the prompt. Return only the prompt.")
-
-	// 	postFormMessage();
-
-	// 	setFormRow(!formRow);
-	// 	setReviewRow(!reviewRow);
-	// };
 
 	const submitForm = async (event) => {
 		event.preventDefault();
@@ -93,24 +60,10 @@ function App() {
 		}))
 	}
 
-	// const postFormMessage = async () => {
-	// 	try {
-	// 		const response = await fetch('/post_chatgpt', {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			},
-	// 			body: JSON.stringify({messge: formMessage})
-	// 		});
-
-	// 		const data = await response.json();
-
-	// 		setGPTResponse(data);
-
-	// 	} catch(error) {
-	// 		console.log(error);
-	// 	}
-	// }
+	const backToForm = () => {
+		setReviewRow(!reviewRow);
+		setFormRow(!formRow);
+	}
 
 
 // const [data, setData] = React.useState(null);
@@ -142,6 +95,7 @@ function App() {
 				<Row>
 					<Col></Col>
 					<Col>
+						<h1>Form</h1>
 						<Form onSubmit={submitForm}>
 							<Form.Group className="mb-3" controlId="formObject1">
 								<Form.Label>What is the main object?</Form.Label>
@@ -221,10 +175,28 @@ function App() {
 				<Row>
 					<Col></Col>
 					<Col xs={7} className="text-center">
+						<h1>Review</h1>
 						<h2>Original message formated to be sent to Chat GPT</h2>
 						<p>{gptResponse.form_message}</p>
 						<h2>Chat GPT response to be sent to DALL·E 2</h2>
 						<p>{gptResponse.gpt_response}</p>
+						<Row>
+							<Col>
+								<Button variant="danger" onClick={backToForm}>Back</Button>
+							</Col>
+							<Col>
+								<Button variant="success">Submit to DALL·E 2</Button>
+							</Col>
+						</Row>
+					</Col>
+					<Col></Col>
+				</Row>
+			)}
+			{finalProductRow && (
+				<Row>
+					<Col></Col>
+					<Col>
+						<h1>Final Product</h1>
 					</Col>
 					<Col></Col>
 				</Row>
