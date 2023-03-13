@@ -27,11 +27,7 @@ app.post("/post_chatgpt", (req, res) => {
     try {
       const completion = await openai.createCompletion({
         model: "text-davinci-003",
-        // temperature: 0,
         max_tokens: 100,
-        // top_p: 1,
-        // frequency_penalty: 0.0,
-        // presence_penalty: 0.0,
         prompt: form_message
       });
 
@@ -51,8 +47,12 @@ app.post("/post_chatgpt", (req, res) => {
     .catch((error) => {
       console.log(error)
     })
+})
 
-  
+app.post("/post_dalle", (req, res) => {
+  console.log(req.body.gptResponse)
+
+  res.json("message from sever")
 })
 
 app.get("/api", (req, res) => {

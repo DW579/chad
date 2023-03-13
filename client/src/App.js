@@ -16,6 +16,7 @@ function App() {
 	const [object2, setObject2] = useState('');
 	const [style, setStyle] = useState({ selectedStyle: '' });
 	const [gptResponse, setGPTResponse] = useState(null);
+	const [dalleResponse, setDalleResponse] = useState(null);
 	
 	const { selectedStyle } = style;
 
@@ -63,6 +64,28 @@ function App() {
 	const backToForm = () => {
 		setReviewRow(!reviewRow);
 		setFormRow(!formRow);
+	}
+
+	const submitGPTResponse = async () => {
+		try {
+			const response = await fetch('/post_dalle', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({gptResponse: gptResponse.gpt_response})
+			});
+
+			const data = await response.json();
+
+			setDalleResponse(data);
+
+		} catch(error) {
+			console.log(error);
+		}
+
+		setReviewRow(!reviewRow);
+		setFinalProductRow(!finalProductRow);
 	}
 
 
@@ -185,7 +208,7 @@ function App() {
 								<Button variant="danger" onClick={backToForm}>Back</Button>
 							</Col>
 							<Col>
-								<Button variant="success">Submit to DALL·E 2</Button>
+								<Button variant="success" onClick={submitGPTResponse}>Submit to DALL·E 2</Button>
 							</Col>
 						</Row>
 					</Col>
@@ -197,6 +220,7 @@ function App() {
 					<Col></Col>
 					<Col>
 						<h1>Final Product</h1>
+						<p>{dalleResponse}</p>
 					</Col>
 					<Col></Col>
 				</Row>
