@@ -108,92 +108,104 @@ function App() {
 			</Row>
 			{formRow && (
 				<Row>
-					<Col></Col>
 					<Col>
-						<h1>Form</h1>
-						<Form onSubmit={submitForm}>
-							<Form.Group className="mb-3" controlId="formObject1">
-								<Form.Label className="bold">What is the main object?</Form.Label>
-								<Form.Control
-									type="text"
-									placeholder="i.e. dog, cat, mouse, owl, etc."
-									onChange={handleObject1Change}
-									value={object1}
-									required
-								/>
-							</Form.Group>
+						<Row className="padding-top">
+							<Col></Col>
+							<Col xs={7} className="text-center">
+								<h1>Welcome to Chad!</h1>
+								<h3>Your Chat GPT Prompt Engineer.</h3>
+							</Col>
+							<Col></Col>
+						</Row>
+						<Row className="padding-top">
+							<Col></Col>
+							<Col>
+								<Form onSubmit={submitForm}>
+									<Form.Group className="mb-3" controlId="formObject1">
+										<Form.Label className="bold">What is the main object?</Form.Label>
+										<Form.Control
+											type="text"
+											placeholder="i.e. dog, cat, mouse, owl, etc."
+											onChange={handleObject1Change}
+											value={object1}
+											required
+										/>
+									</Form.Group>
 
-							<Form.Group className="mb-3" controlId="formObject2">
-								<Form.Label className="bold">What is the secondary object?</Form.Label>
-								<Form.Control
-									type="text"
-									placeholder="i.e. table, mountain, forest, etc."
-									onChange={handleObject2Change}
-									value={object2}
-									required
-								/>
-							</Form.Group>
+									<Form.Group className="mb-3" controlId="formObject2">
+										<Form.Label className="bold">What is the secondary object?</Form.Label>
+										<Form.Control
+											type="text"
+											placeholder="i.e. table, mountain, forest, etc."
+											onChange={handleObject2Change}
+											value={object2}
+											required
+										/>
+									</Form.Group>
 
-							<Form.Group className="mb-3" controlId="formStyle">
-								<Form.Label className="bold">Pick the style</Form.Label>
-								<Form.Check 
-									value="minimalist"
-									type="radio" 
-									aria-label="radio 1"
-									label="Minimalist" 
-									onChange={handleStyleChange}
-									checked={selectedStyle === "minimalist"}
-								/>
-								<Form.Check 
-									value="flat graphic"
-									type="radio" 
-									aria-label="radio 2"
-									label="Flat Graphic" 
-									onChange={handleStyleChange}
-									checked={selectedStyle === "flat graphic"}
-								/>
-								<Form.Check 
-									value="scandinavian"
-									type="radio" 
-									aria-label="radio 3"
-									label="Scandinavian" 
-									onChange={handleStyleChange}
-									checked={selectedStyle === "scandinavian"}
-								/>
-								<Form.Check 
-									value="35mm"
-									type="radio" 
-									aria-label="radio 4"
-									label="35mm" 
-									onChange={handleStyleChange}
-									checked={selectedStyle === "35mm"}
-								/>
-								<Form.Check 
-									value="retro graphic"
-									type="radio" 
-									aria-label="radio 5"
-									label="Retro Graphic" 
-									onChange={handleStyleChange}
-									checked={selectedStyle === "retro graphic"}
-								/>
-							</Form.Group>
+									<Form.Group className="mb-3" controlId="formStyle">
+										<Form.Label className="bold">Pick the style</Form.Label>
+										<Form.Check 
+											value="impressionists"
+											type="radio" 
+											aria-label="radio 1"
+											label="Impressionists" 
+											onChange={handleStyleChange}
+											checked={selectedStyle === "impressionists"}
+										/>
+										<Form.Check 
+											value="flat graphic"
+											type="radio" 
+											aria-label="radio 2"
+											label="Flat Graphic" 
+											onChange={handleStyleChange}
+											checked={selectedStyle === "flat graphic"}
+										/>
+										<Form.Check 
+											value="scandinavian"
+											type="radio" 
+											aria-label="radio 3"
+											label="Scandinavian" 
+											onChange={handleStyleChange}
+											checked={selectedStyle === "scandinavian"}
+										/>
+										<Form.Check 
+											value="35mm"
+											type="radio" 
+											aria-label="radio 4"
+											label="35mm" 
+											onChange={handleStyleChange}
+											checked={selectedStyle === "35mm"}
+										/>
+										<Form.Check 
+											value="retro graphic"
+											type="radio" 
+											aria-label="radio 5"
+											label="Retro Graphic" 
+											onChange={handleStyleChange}
+											checked={selectedStyle === "retro graphic"}
+										/>
+									</Form.Group>
 
-							<Button variant="primary" type="submit" onClick={() => submitForm}>
-								Submit
-							</Button>
-						</Form>
+									<Button variant="primary" type="submit" onClick={() => submitForm}>
+										Send to Chat GPT
+									</Button>
+								</Form>
+							</Col>
+							<Col></Col>
+						</Row>
 					</Col>
-					<Col></Col>
+					
 				</Row>
 			)}
 			{reviewRow && (
-				<Row>
+				<Row className="padding-top">
 					<Col></Col>
 					<Col xs={7} className="text-center">
 						<h1>Review</h1>
-						<h2>Original message formated to be sent to Chat GPT</h2>
+						<h3>Original message formated to be sent to Chat GPT</h3>
 						<p>{gptResponse.form_message}</p>
-						<h2>Chat GPT response to be sent to DALL·E 2</h2>
+						<h3>Chat GPT response to be sent to DALL·E 2</h3>
 						<p>{gptResponse.gpt_response}</p>
 						<Row>
 							<Col>
@@ -208,12 +220,12 @@ function App() {
 				</Row>
 			)}
 			{finalProductRow && (
-				<Row>
+				<Row className="padding-top">
 					<Col></Col>
-					<Col xs={7} className="text-center">
-						<h1>Final Product</h1>
-						<img src={dalleResponse.url} width="100%" />
-						<h2>Prompt used:</h2>
+					<Col xs={4} className="text-center">
+						<h1>Final Product from DALL·E</h1>
+						<img src={dalleResponse.url} width="100%" className="padding-top" />
+						<h2 className="padding-top">Prompt used:</h2>
 						<p>{gptResponse.gpt_response}</p>
 					</Col>
 					<Col></Col>
