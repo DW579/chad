@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require("express");
 const bodyParser = require('body-parser');
 const { Configuration, OpenAIApi } = require("openai");
@@ -12,6 +13,9 @@ const openai = new OpenAIApi(configuration);
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+// Node serve the files for built React app
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -80,6 +84,11 @@ app.post("/post_dalle", (req, res) => {
       res.status(500).json({ error: error.message });
     })
 })
+
+// All other GET requests will be directed to homepage
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
