@@ -6,10 +6,12 @@ import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 function App() {
+	const [errorRow, setErrorRow] = useState(false);
 	const [formRow, setFormRow] = useState(true);
 	const [reviewRow, setReviewRow] = useState(false);
 	const [finalProductRow, setFinalProductRow] = useState(false);
@@ -110,6 +112,15 @@ function App() {
 					</Container>
 				</Navbar>
 			</Row>
+			{errorRow && (
+				<Row className="padding-top">
+					<Col></Col>
+					<Col className="text-center">
+						<Alert key="danger" variant="danger">Unexpected error - please reload app</Alert>
+					</Col>
+					<Col></Col>
+				</Row>
+			)}
 			{formRow && (
 				<Row>
 					<Col>
