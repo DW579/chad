@@ -158,12 +158,12 @@ function App() {
 											checked={selectedStyle === "impressionists"}
 										/>
 										<Form.Check 
-											value="flat graphic"
+											value="digital art"
 											type="radio" 
 											aria-label="radio 2"
-											label="Flat Graphic" 
+											label="Digital Art" 
 											onChange={handleStyleChange}
-											checked={selectedStyle === "flat graphic"}
+											checked={selectedStyle === "digital art"}
 										/>
 										<Form.Check 
 											value="scandinavian"
@@ -174,12 +174,12 @@ function App() {
 											checked={selectedStyle === "scandinavian"}
 										/>
 										<Form.Check 
-											value="35mm"
+											value="synthwave"
 											type="radio" 
 											aria-label="radio 4"
-											label="35mm" 
+											label="Synthwave" 
 											onChange={handleStyleChange}
-											checked={selectedStyle === "35mm"}
+											checked={selectedStyle === "synthwave"}
 										/>
 										<Form.Check 
 											value="retro graphic"
