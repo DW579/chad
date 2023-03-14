@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
@@ -88,15 +89,6 @@ function App() {
 		setFinalProductRow(!finalProductRow);
 	}
 
-
-// const [data, setData] = React.useState(null);
-
-// React.useEffect(() => {
-//   fetch("/api")
-//     .then((res) => res.json())
-//     .then((data) => setData(data.message));
-// }, []);
-
 	return (
 // <div className="App">
 //   <header className="App-header">
@@ -121,7 +113,7 @@ function App() {
 						<h1>Form</h1>
 						<Form onSubmit={submitForm}>
 							<Form.Group className="mb-3" controlId="formObject1">
-								<Form.Label>What is the main object?</Form.Label>
+								<Form.Label className="bold">What is the main object?</Form.Label>
 								<Form.Control
 									type="text"
 									placeholder="i.e. dog, cat, mouse, owl, etc."
@@ -132,7 +124,7 @@ function App() {
 							</Form.Group>
 
 							<Form.Group className="mb-3" controlId="formObject2">
-								<Form.Label>What is the secondary object?</Form.Label>
+								<Form.Label className="bold">What is the secondary object?</Form.Label>
 								<Form.Control
 									type="text"
 									placeholder="i.e. table, mountain, forest, etc."
@@ -143,7 +135,7 @@ function App() {
 							</Form.Group>
 
 							<Form.Group className="mb-3" controlId="formStyle">
-								<Form.Label>Pick the style</Form.Label>
+								<Form.Label className="bold">Pick the style</Form.Label>
 								<Form.Check 
 									value="minimalist"
 									type="radio" 
@@ -218,9 +210,11 @@ function App() {
 			{finalProductRow && (
 				<Row>
 					<Col></Col>
-					<Col>
+					<Col xs={7} className="text-center">
 						<h1>Final Product</h1>
-						<p>{dalleResponse}</p>
+						<img src={dalleResponse.url} width="100%" />
+						<h2>Prompt used:</h2>
+						<p>{gptResponse.gpt_response}</p>
 					</Col>
 					<Col></Col>
 				</Row>

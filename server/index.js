@@ -50,9 +50,31 @@ app.post("/post_chatgpt", (req, res) => {
 })
 
 app.post("/post_dalle", (req, res) => {
-  console.log(req.body.gptResponse)
 
-  res.json("message from sever")
+  async function dallEImageCreation(prompt) {
+    try {
+      const create_image = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: "1024x1024"
+      });
+
+      return create_image;
+    }
+    catch(error) {
+      console.log(error);
+    }
+  }
+
+  dallEImageCreation(req.body.gptResponse)
+    .then((data) => {
+      const image_url = data.data.data[0].url;
+
+      res.json({url: image_url});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 app.get("/api", (req, res) => {
