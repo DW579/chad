@@ -35,6 +35,7 @@ app.post("/post_chatgpt", (req, res) => {
     }
     catch(error) {
       console.log(error);
+      res.status(500).json({ error: error.message });
     }
   }
 
@@ -45,7 +46,8 @@ app.post("/post_chatgpt", (req, res) => {
       res.json({form_message: form_message, gpt_response: gpt_response})
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
+      res.status(500).json({ error: error.message });
     })
 })
 
@@ -63,6 +65,7 @@ app.post("/post_dalle", (req, res) => {
     }
     catch(error) {
       console.log(error);
+      res.status(500).json({ error: error.message });
     }
   }
 
@@ -73,7 +76,8 @@ app.post("/post_dalle", (req, res) => {
       res.json({url: image_url});
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
+      res.status(500).json({ error: error.message });
     })
 })
 

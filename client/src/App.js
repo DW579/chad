@@ -47,6 +47,8 @@ function App() {
 			setGPTResponse(data);
 
 		} catch(error) {
+			setErrorRow(!errorRow);
+
 			console.log(error);
 		}
 
@@ -94,6 +96,8 @@ function App() {
 			setDalleResponse(data);
 
 		} catch(error) {
+			setErrorRow(!errorRow);
+
 			console.log(error);
 		}
 
