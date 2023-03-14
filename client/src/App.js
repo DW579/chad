@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState }  from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -76,6 +76,13 @@ function App() {
 	const backToForm = () => {
 		setFormLoading(!isFormLoading);
 		setReviewRow(!reviewRow);
+		setFormRow(!formRow);
+	}
+
+	const backToHome = () => {
+		setFormLoading(!isFormLoading);
+		setGPTResponseLoading(!isGPTResponseLoading);
+		setFinalProductRow(!finalProductRow);
 		setFormRow(!formRow);
 	}
 
@@ -263,9 +270,10 @@ function App() {
 					<Col></Col>
 					<Col xs={4} className="text-center">
 						<h1>Final Product from DALL·E</h1>
-						<img src={dalleResponse.url} width="100%" className="padding-top" />
+						<img src={dalleResponse.url} width="100%" alt="" className="padding-top" />
 						<h2 className="padding-top">Prompt used:</h2>
 						<p>{gptResponse.gpt_response}</p>
+						<Button variant="danger" onClick={backToHome}>Back to Home</Button>
 					</Col>
 					<Col></Col>
 				</Row>
