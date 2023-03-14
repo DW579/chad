@@ -13,9 +13,14 @@ function App() {
 	const [formRow, setFormRow] = useState(true);
 	const [reviewRow, setReviewRow] = useState(false);
 	const [finalProductRow, setFinalProductRow] = useState(false);
+
+	const [isFormLoading, setFormLoading] = useState(false);
+	const [isGPTResponseLoading, setGPTResponseLoading] = useState(false);
+
 	const [object1, setObject1] = useState('');
 	const [object2, setObject2] = useState('');
 	const [style, setStyle] = useState({ selectedStyle: '' });
+
 	const [gptResponse, setGPTResponse] = useState(null);
 	const [dalleResponse, setDalleResponse] = useState(null);
 	
@@ -23,6 +28,8 @@ function App() {
 
 	const submitForm = async (event) => {
 		event.preventDefault();
+
+		setFormLoading(!isFormLoading);
 
 		try {
 			const response = await fetch('/post_chatgpt', {
@@ -63,11 +70,14 @@ function App() {
 	}
 
 	const backToForm = () => {
+		setFormLoading(!isFormLoading);
 		setReviewRow(!reviewRow);
 		setFormRow(!formRow);
 	}
 
 	const submitGPTResponse = async () => {
+		setGPTResponseLoading(!isGPTResponseLoading)
+
 		try {
 			const response = await fetch('/post_dalle', {
 				method: 'POST',
@@ -90,12 +100,6 @@ function App() {
 	}
 
 	return (
-// <div className="App">
-//   <header className="App-header">
-//     <img src={logo} className="App-logo" alt="logo" />
-//     <p>{!data ? "Loading..." : data}</p>
-//   </header>
-// </div>
 		<Container fluid>
 			<Row>
 				<Navbar bg="dark" variant="dark">
@@ -187,8 +191,13 @@ function App() {
 										/>
 									</Form.Group>
 
-									<Button variant="primary" type="submit" onClick={() => submitForm}>
-										Send to Chat GPT
+									<Button 
+										variant="primary" 
+										type="submit" 
+										disabled={isFormLoading}
+										onClick={() => submitForm}
+									>
+										{isFormLoading ? 'Loading...' : 'Send to Chat GPT'}
 									</Button>
 								</Form>
 							</Col>
@@ -202,17 +211,32 @@ function App() {
 				<Row className="padding-top">
 					<Col></Col>
 					<Col xs={7} className="text-center">
-						<h1>Review</h1>
-						<h3>Original message formated to be sent to Chat GPT</h3>
-						<p>{gptResponse.form_message}</p>
-						<h3>Chat GPT response to be sent to DALL·E 2</h3>
-						<p>{gptResponse.gpt_response}</p>
 						<Row>
 							<Col>
-								<Button variant="danger" onClick={backToForm}>Back</Button>
+								<h1>Review</h1>
+								<h3 className="padding-top">Original message formated to be sent to Chat GPT</h3>
+								<p>{gptResponse.form_message}</p>
+								<h3>Chat GPT response to be sent to DALL·E 2</h3>
+								<p>{gptResponse.gpt_response}</p>
+							</Col>
+						</Row>
+						<Row className="padding-top">
+							<Col>
+								<Button 
+									variant="danger" 
+									onClick={backToForm}
+								>
+									Back
+								</Button>
 							</Col>
 							<Col>
-								<Button variant="success" onClick={submitGPTResponse}>Submit to DALL·E 2</Button>
+								<Button 
+									variant="success" 
+									disabled={isGPTResponseLoading}
+									onClick={submitGPTResponse}
+								>
+									{isGPTResponseLoading ? 'Loading...' : 'Submit to DALL·E 2'}
+								</Button>
 							</Col>
 						</Row>
 					</Col>
