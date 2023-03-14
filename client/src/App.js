@@ -235,10 +235,10 @@ function App() {
 					<Col xs={7} className="text-center">
 						<Row>
 							<Col>
-								<h1>Review</h1>
-								<h3 className="padding-top">Original message formated to be sent to Chat GPT</h3>
+								<h1>Review Prompts Below:</h1>
+								<h3 className="padding-top">Original message with user objects and style formatted and sent to Chat GPT</h3>
 								<p>{gptResponse.form_message}</p>
-								<h3>Chat GPT response to be sent to DALL·E 2</h3>
+								<h3>Prompt created by Chat GPT from original message prompt to be sent to DALL·E 2</h3>
 								<p>{gptResponse.gpt_response}</p>
 							</Col>
 						</Row>
@@ -271,7 +271,7 @@ function App() {
 					<Col xs={4} className="text-center">
 						<h1>Final Product from DALL·E</h1>
 						<img src={dalleResponse.url} width="100%" alt="" className="padding-top" />
-						<h2 className="padding-top">Prompt used:</h2>
+						<h2 className="padding-top">Prompt used that was created by Chat GPT:</h2>
 						<p>{gptResponse.gpt_response}</p>
 						<Button variant="danger" onClick={backToHome}>Back to Home</Button>
 					</Col>
